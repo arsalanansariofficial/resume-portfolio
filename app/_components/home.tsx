@@ -9,14 +9,15 @@ import { NavLink } from './nav-links';
 
 export default function Home() {
   return (
-    <div className="min-h-screen gap-4 space-y-4 bg-smoky-black p-4 xl:grid xl:grid-flow-col xl:grid-cols-12 xl:p-8">
+    <div className="min-h-screen gap-4 space-y-4 bg-smoky-black p-4 lg:grid lg:grid-flow-col lg:grid-cols-[auto_1fr] lg:p-4">
       <Aside />
+      <Footer />
     </div>
   );
 }
 
 function Aside() {
-  const [isAccordianOpen, setIsAccordianOpen] = useState(true);
+  const [isAccordianOpen, setIsAccordianOpen] = useState(false);
 
   const person = {
     name: 'Arsalan Ansari',
@@ -32,10 +33,11 @@ function Aside() {
   };
 
   return (
-    <aside className="sidebar contact-list_item space-y-4 rounded-3xl border border-jet bg-eerie-black-2 p-4 shadow-shadow-1 sm:space-y-4 sm:p-6 md:space-y-6 md:p-6 xl:col-span-3 xl:self-start">
-      <div className="sidebar_info relative z-10 grid grid-flow-col grid-cols-[5em_1fr] gap-4 sm:grid-cols-[5.5em_1fr] md:grid-cols-[7em_1fr] md:gap-8 xl:grid-cols-[5em_1fr] xl:gap-4">
+    <aside className="sidebar contact-list_item space-y-4 rounded-3xl border border-jet bg-eerie-black-2 p-4 shadow-shadow-1 sm:space-y-4 sm:p-6 md:space-y-6 md:p-6 lg:space-y-4 lg:self-start lg:p-4">
+      <div className="sidebar_info relative z-10 grid grid-flow-col grid-cols-[5em_1fr] gap-4 sm:grid-cols-[5.5em_1fr] md:grid-cols-[7em_1fr] md:gap-8 lg:grid-cols-[5em_1fr] lg:gap-4">
         <figure className="info_profile-box rounded-3xl bg-bg-gradient-onyx p-2">
           <Image
+            priority
             width={100}
             height={100}
             alt={person.name}
@@ -55,7 +57,7 @@ function Aside() {
         </div>
 
         <button
-          className="info_chevron focus absolute -right-4 -top-4 rounded-bl-3xl rounded-tr-3xl bg-bg-gradient-onyx px-2 shadow-shadow-2 before:absolute before:inset-0 before:-z-10 before:block before:rounded-bl-3xl before:rounded-tr-3xl before:bg-bg-gradient-onyx before:content-[''] hover:bg-bg-gradient-yellow-1 focus:bg-bg-gradient-yellow-1 sm:-right-6 sm:-top-6 md:px-8 md:py-2 xl:hidden"
+          className="info_chevron focus absolute -right-4 -top-4 rounded-bl-3xl rounded-tr-3xl bg-bg-gradient-onyx px-2 shadow-shadow-2 before:absolute before:inset-0 before:-z-10 before:block before:rounded-bl-3xl before:rounded-tr-3xl before:bg-bg-gradient-onyx before:content-[''] hover:bg-bg-gradient-yellow-1 focus:bg-bg-gradient-yellow-1 sm:-right-6 sm:-top-6 md:px-8 md:py-2 lg:hidden"
           onClick={() =>
             setIsAccordianOpen(isAccordianOpen => !isAccordianOpen)
           }
@@ -75,18 +77,18 @@ function Aside() {
       <div
         className={cn(
           'sidebar_more-info space-y-4',
-          !isAccordianOpen && 'hidden'
+          !isAccordianOpen && 'hidden lg:block'
         )}
       >
-        <ul className="info_contact-list grid items-start gap-4 gap-y-4 border-b border-t border-jet py-4 md:grid-cols-2 md:gap-8 md:gap-y-8 md:py-10 xl:grid-cols-1">
+        <ul className="info_contact-list grid items-start gap-4 gap-y-4 border-b border-t border-jet py-4 md:grid-cols-2 md:gap-8 md:gap-y-8 md:py-10 lg:grid-cols-1 lg:gap-y-4 lg:py-4">
           {Object.keys(person.contactDetails).map(_key => {
             const key = _key as keyof typeof person.contactDetails;
             return (
               <li
                 key={key}
-                className="contact-list_item flex gap-4 text-white md:gap-8"
+                className="contact-list_item flex gap-4 text-white md:gap-8 lg:gap-4"
               >
-                <div className="item_icon relative z-10 aspect-square content-center rounded-lg bg-border-gradient-onyx text-orange-yellow-crayola shadow-shadow-2 before:absolute before:inset-[1px] before:-z-10 before:block before:rounded-lg before:bg-eerie-black-1 before:content-['']">
+                <div className="item_icon relative z-10 aspect-square content-center rounded-lg bg-border-gradient-onyx p-2 text-orange-yellow-crayola shadow-shadow-2 before:absolute before:inset-[1px] before:-z-10 before:block before:rounded-lg before:bg-eerie-black-1 before:content-[''] sm:p-3 md:p-4">
                   {key === 'dob' && <Radix.CalendarIcon />}
                   {key === 'email' && <Radix.EnvelopeOpenIcon />}
                   {key === 'phone' && <Radix.IdCardIcon />}
@@ -123,7 +125,7 @@ function Aside() {
 
 function Main() {
   return (
-    <main className="bg-app-blue-700 text-app-primary rounded-3xl bg-[#2b2b2cbf] p-4 text-orange-yellow-crayola shadow-shadow-2 backdrop-blur xl:col-span-4">
+    <main className="bg-app-blue-700 text-app-primary rounded-3xl bg-[#2b2b2cbf] p-4 text-orange-yellow-crayola shadow-shadow-2 backdrop-blur lg:col-span-4">
       Main
     </main>
   );
@@ -131,7 +133,7 @@ function Main() {
 
 function Footer() {
   return (
-    <nav className="navbar fixed bottom-0 left-0 right-0 z-10 w-full rounded-t-2xl border border-jet bg-[#2b2b2cbf] shadow-shadow-2 backdrop-blur">
+    <nav className="navbar fixed bottom-0 left-0 right-0 z-10 w-full rounded-t-2xl border border-jet bg-[#2b2b2cbf] shadow-shadow-2 backdrop-blur lg:hidden">
       <ul className="navbar_list flex flex-wrap items-center justify-center px-4">
         <li className="list_item">
           <NavLink href="/">About</NavLink>
